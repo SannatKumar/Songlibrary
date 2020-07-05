@@ -12,7 +12,7 @@ namespace WebsiteCrud
     {
         private readonly ApplicationDbContext _db;
 
-        public CreateModel(ApplicationExceptionDbContext db)
+        public CreateModel(ApplicationDbContext db)
         {
             _db = db;
         }
