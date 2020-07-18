@@ -8,32 +8,31 @@ using WebsiteCrud.Model;
 
 namespace WebsiteCrud
 {
-    public class CreateModel : PageModel
+    public class EditModel : PageModel
     {
-        private readonly ApplicationDbContext _db;
-        public CreateModel(ApplicationDbContext db)
+        private ApplicationDbContext _db;
+
+        public EditModel(ApplicationDbContext db)
         {
             _db = db;
         }
-
         [BindProperty]
         public Song Song { get; set; }
-        public void OnGet()
+        public async Task OnGetAsync(int id)
         {
+            Song = await _db.Song.FindAsync(id);
+
         }
 
+        //This is a post handler for the edit page. Return type Iactionresult is used because the redirecting  of page is done here. 
         public async Task<IActionResult> OnPost()
         {
             if(ModelState.IsValid)
             {
-                await _db.Song.AddAsync(Song);
-                await _db.SaveChangesAsync();
-                return RedirectToPage("Index");
-            }
-            else
-            {
-                return Page();
+                var SongFromDb = await _db.Song.FindAsync(Book.Id);
+                SongFromDb.
             }
         }
+
     }
 }
