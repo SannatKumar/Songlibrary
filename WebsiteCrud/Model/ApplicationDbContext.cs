@@ -12,10 +12,5 @@ namespace WebsiteCrud.Model
         {
         }
         public DbSet<Song> Song { get; set; }
-
-        public static implicit operator ApplicationDbContext(ApplicationExceptionDbContext v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
