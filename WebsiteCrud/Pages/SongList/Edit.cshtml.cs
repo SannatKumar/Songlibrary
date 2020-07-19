@@ -18,7 +18,7 @@ namespace WebsiteCrud
         }
         [BindProperty]
         public Song Song { get; set; }
-        public async Task OnGetAsync(int id)
+        public async Task OnGet(int id)
         {
             Song = await _db.Song.FindAsync(id);
 
@@ -29,9 +29,16 @@ namespace WebsiteCrud
         {
             if(ModelState.IsValid)
             {
-                var SongFromDb = await _db.Song.FindAsync(Book.Id);
-                SongFromDb.
+                var SongFromDb = await _db.Song.FindAsync(Song.Id);
+                SongFromDb.Title = Song.Title;
+                SongFromDb.Artist = Song.Artist;
+                SongFromDb.Lyrics = Song.Lyrics;
+
+                await _db.SaveChangesAsync();
+
+                return RedirectToPage("Index");
             }
+            return RedirectToPage();
         }
 
     }
